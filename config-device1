@@ -1,0 +1,16 @@
+- hostname: csr1000vpython02
+  username: python
+  password: cisco
+  netconf_enabled: true
+  interfaces:
+    ethernet:
+      -name: GigabitEthernet1
+       description: RESTful API Interface
+       subnet_mask: 255.255.255.0
+       ip_address: 10.3.255.102
+       negotiation: auto
+    loopback:
+      -name: Loopback100
+       description: Interface Loopback100
+       subnet_mask: 255.255.255.0
+       ip_address: 10.3.254.102
