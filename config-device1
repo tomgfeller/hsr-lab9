@@ -1,6 +1,6 @@
 - hostname: csr1000vpython02
   username: python
-  password: cisco
+  password: $1$BWro$/2EY8kG.GUGM1SMizve310
   netconf_enabled: true
   interfaces:
     ethernet:

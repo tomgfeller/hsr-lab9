@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 import yaml
 import pprint
 from datetime import date
+import napalm
 
 #Read YAML File into Python Dict
 yaml_file = open('config-device1')
@@ -26,3 +27,27 @@ for device in config:
     print(rendered_config)
     print("===============================")
 
+
+#NAPALM Driver Cred to Access Cisco IOS Device
+devicelist = ['10.3.255.102']
+
+
+#Loop trough each IP Address and validate the current config against the template
+for ip_address in devicelist:
+    print ("Connecting to " + str(ip_address))
+    print("===============================")
+    driver = napalm.get_network_driver('ios')
+    ios = driver(ip_address, 'python', 'cisco')
+    ios.open()
+    ios.load_replace_candidate(config= rendered_config)
+    diffs = ios.compare_config()
+    if len(diffs) > 0:
+        print('config has changed')
+        print("===============================")
+        print("===========Changes:============")
+        print(diffs)
+        print("===============================")
+        ios.commit_config()
+    else:
+        print('Nothing has changed')
+        ios.discard_config()
