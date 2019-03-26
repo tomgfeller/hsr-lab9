@@ -64,17 +64,17 @@ redundancy
 !
 {% for interface in interfaces.ethernet %}
 interface {{ interface.name }}
-  description {{ description }}
+  description {{ interface.description }}
   no shutdown
-  ip address {{ ip_address }} {{ subnet_mask }}
-  negotiation {{ negotiation }}
+  ip address {{ interface.ip_address }} {{ interface.subnet_mask }}
+  negotiation {{ interface.negotiation }}
 {% endfor %}
 !
 {% for interface in interfaces.loopback %}
 interface {{ interface.name }}
-  description {{ description }}
+  description {{ interface.description }}
   no shutdown
-  ip address {{ ip_address }} {{ subnet_mask }}
+  ip address {{ interface.ip_address }} {{ interface.subnet_mask }}
 {% endfor %}
 !
 router bgp 2
